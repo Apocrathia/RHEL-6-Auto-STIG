@@ -117,4 +117,61 @@ function RHEL-06-000233 {
 	sed -i 's/#IgnoreRhosts/IgnoreRhosts/g' /etc/ssh/sshd_config
 }
 
-# Full list of check IDs
+# Here's how all of the checks should look
+function v-00000 {
+	# make sure a parameter was passed
+	if [ $# -eq 0 ]; then
+		# Alert the user
+		echo "Something went wrong"
+		# Exit the program
+		exit
+	# determine parameter
+	elif [ `echo $1 | awk '{print tolower($0)}'` == "check" ]; then
+		echo "Checking for V-00000"
+		# do some stuff
+		result = true # or false
+		if [ $result == true ]; then
+			echo "Remediation required"
+			# maybe prompt the user?
+			v-00000 "remediate"
+		else
+			echo "No remediation required"
+			# this seems a little bit much if we call the same function
+			# after remediation. Maybe some sort of intelligence here?
+		fi
+	elif [ `echo $1 | awk '{print tolower($0)}'` == "remediate" ]; then
+		echo "Remediating for V-00000"
+		# do some stuff
+		v-00000 "check"
+		# hopefully, at this point, the remediation worked, and you're clear.
+		
+		# maybe the check should actually return true or false...
+	else
+		echo "Something else went wrong"
+		exit
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
